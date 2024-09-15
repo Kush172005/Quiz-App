@@ -1,0 +1,40 @@
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { quizzes } from "../assets/data";
+import Confetti from "./Confetti";
+
+const Result = () => {
+    const { state } = useLocation();
+    const { quizId, selectedOptions } = state || {}; // Add default empty object
+    const quiz = quizzes.find((q) => q.id === quizId);
+
+    if (!quiz) {
+        return <div>Quiz not found</div>;
+    }
+
+    const calculateScore = () => {
+        return quiz.questions.reduce((score, question, index) => {
+            const userAnswer = selectedOptions[index];
+            return score + (userAnswer === question.ans ? 1 : 0);
+        }, 0);
+    };
+
+    return (
+        <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-12">
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 shadow-2xl rounded-xl border-2 border-soft-teal p-8 w-full max-w-3xl space-y-6">
+                <h2 className="text-3xl font-bold text-soft-teal text-center">
+                    Quiz Results
+                </h2>
+                <p className="text-center text-gray-300">
+                    Your score: {calculateScore()} / {quiz.questions.length}
+                </p>
+            </div>
+
+            <div className="mt-8">
+                <Confetti />
+            </div>
+        </div>
+    );
+};
+
+export default Result;

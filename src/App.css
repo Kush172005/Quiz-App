@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+.ql-editor::before {
+  color: #64d2b3 !important; 
+  font-style: italic;
+  font-size: 16px; 
+  opacity: 0.8; 
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.text-soft-teal {
+  color: #64d2b3;
+  /* Softer teal */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.bg-soft-teal {
+  background-color: #64d2b3;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.bg-muted-purple {
+  background-color: #9180c2;
+  /* Soft muted purple */
+}
+
+.bg-muted-purple-h:hover {
+  background-color: #9180c2;
+  /* Soft muted purple */
+}
+
+.ql-toolbar button {
   color: white;
+  background-color: transparent;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+/* Card Styling */
+.card {
+  background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid #64d2b3;
+  transition: all 0.3s ease;
+  transform: perspective(1000px);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card:hover {
+  transform: perspective(1000px) scale(1.03);
+  box-shadow: 0 0 15px #64d2b3, 0 0 25px #9180c2;
+}
+
+/* Card Button */
+.card-button {
+  background-color: #64d2b3;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.card-button:hover {
+  background-color: #9180c2;
+  color: white;
 }

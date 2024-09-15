@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Main from "./components/Main";
+import Quiz from "./components/Quiz";
+import Create from "./components/Create";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Confetti from "./components/Confetti";
+import { AuthProvider } from "./components/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
+import "./App.css";
+import Result from "./components/Result";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    {/* Public routes */}
+                    <Route path="/" element={<Login />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+
+                    {/* Protected routes */}
+                    <Route
+                        path="/main"
+                        element={<PrivateRoute element={<Main />} />}
+                    />
+
+                    <Route
+                        path="/quiz/:quizId"
+                        element={<PrivateRoute element={<Quiz />} />}
+                    />
+
+                    <Route
+                        path="/result"
+                        element={<PrivateRoute element={<Result />} />}
+                    />
+
+                    <Route
+                        path="/create"
+                        element={<PrivateRoute element={<Create />} />}
+                    />
+
+                    <Route
+                        path="/confetti"
+                        element={<PrivateRoute element={<Confetti />} />}
+                    />
+                </Routes>
+            </Router>
+        </AuthProvider>
+    );
 }
 
 export default App;
