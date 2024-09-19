@@ -60,3 +60,18 @@
   background-color: #9180c2;
   color: white;
 }
+
+.Toastify__toast--success {
+  background-color: #64D2B3; /* Soft teal */
+  color: black;
+}
+
+.Toastify__toast--error {
+  background-color: #FF4081; /* Red for error */
+  color: white;
+}
+
+.Toastify__toast--info {
+  background-color: #9180C2; /* Muted purple */
+  color: white;
+}

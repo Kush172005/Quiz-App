@@ -12,25 +12,33 @@ const Confetti = () => {
     };
 
     return (
-        <div className="relative">
-            {isExploding && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <ConfettiExplosion
-                        force={0.6}
-                        duration={2500}
-                        particleCount={80}
-                        width={1000}
-                        colors={["#64d2b3", "#9180c2", "#FF4081", "#00B8D9"]}
-                    />
-                </div>
-            )}
-            <button
-                onClick={triggerConfetti}
-                className="bg-soft-teal text-black px-4 py-2 rounded-lg hover:text-white transition duration-300"
-            >
-                Celebrate
-            </button>
-        </div>
+        <>
+            <div className="flex justify-center">
+                <button
+                    onClick={triggerConfetti}
+                    className="border-2 border-soft-teal text-soft-teal bg-gradient-to-r from-gray-800 to-gray-900 text-black px-4 py-2 rounded-lg hover:text-white transition duration-300"
+                >
+                    🎉 Celebrate
+                </button>
+
+                {isExploding && (
+                    <div className="fixed inset-0 flex items-start justify-center mt-10 z-50">
+                        <ConfettiExplosion
+                            force={0.6}
+                            duration={2500}
+                            particleCount={220}
+                            width={1500}
+                            colors={[
+                                "#64d2b3",
+                                "#9180c2",
+                                "#FF4081",
+                                "#00B8D9",
+                            ]} // Your custom colors
+                        />
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 

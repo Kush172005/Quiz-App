@@ -1,12 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { quizzes } from "../assets/data";
+import { useAuth } from "./AuthContext";
 
 const QuizList = () => {
     const navigate = useNavigate();
+    const { logout } = useAuth();
 
     const handlePlay = (quizId) => {
         navigate(`/quiz/${quizId}`);
+    };
+
+    const isUserSignedIn = () => {
+        const user = localStorage.getItem("meraGrahak");
+        return user !== null;
     };
 
     return (
@@ -26,12 +33,26 @@ const QuizList = () => {
                     >
                         Create a Quiz
                     </button>
-                    <button
-                        onClick={() => navigate("/login")}
-                        className="border-2 border-neon-blue text-neon-blue py-2 px-4 rounded-md font-semibold hover:bg-magenta hover:text-white transition duration-300 ease-in-out glow-border"
-                    >
-                        Login
-                    </button>
+
+                    {isUserSignedIn ? (
+                        <button
+                            onClick={() => {
+                                logout();
+                                localStorage.removeItem("meraGrahak");
+                                navigate("/signup");
+                            }}
+                            className="border-2 border-neon-blue text-neon-blue py-2 px-4 rounded-md font-semibold hover:bg-magenta hover:text-white transition duration-300 ease-in-out glow-border"
+                        >
+                            Logout
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => navigate("/login")}
+                            className="border-2 border-neon-blue text-neon-blue py-2 px-4 rounded-md font-semibold hover:bg-magenta hover:text-white transition duration-300 ease-in-out glow-border"
+                        >
+                            Login
+                        </button>
+                    )}
                 </div>
             </header>
 

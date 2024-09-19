@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const { login } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const savedUser = localStorage.getItem("meraGrahak");
+        if (savedUser) {
+            login();
+            navigate("/main");
+        }
+    }, [navigate, login]);
 
     const handleSignup = (e) => {
         e.preventDefault();
-        // Handle signup logic
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+
+        const userData = { email, password };
+        localStorage.setItem("meraGrahak", JSON.stringify(userData));
+        navigate("/main");
     };
 
     return (

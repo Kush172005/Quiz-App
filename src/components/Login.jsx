@@ -1,18 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { login } = useAuth();
+    const { isAuthenticated, login } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const savedUser = localStorage.getItem("meraGrahak");
+        if (savedUser && !isAuthenticated) {
+            login();
+            navigate("/main");
+        }
+    }, [isAuthenticated, navigate, login]);
 
     const handleLogin = (e) => {
         e.preventDefault();
         if (email === "test@gmail.com" && password === "quiz@123") {
+            toast.success("Login Successful");
             login();
             navigate("/main");
+        } else {
+            const storedUser = JSON.parse(localStorage.getItem("meraGrahak"));
+
+            if (
+                storedUser &&
+                storedUser.email === email &&
+                storedUser.password === password
+            ) {
+                toast.success("Login Successful");
+                login();
+                navigate("/main");
+            } else {
+                toast.error("Invalid credentials or user not registered");
+            }
         }
     };
 
