@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { toast } from "react-toastify";
 
 const Signup = () => {
     const [email, setEmail] = useState("");
@@ -20,14 +21,20 @@ const Signup = () => {
     const handleSignup = (e) => {
         e.preventDefault();
 
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
+        if (password === "" || email === "") {
+            toast.error("All fields are required");
             return;
         }
 
-        const userData = { email, password };
-        localStorage.setItem("meraGrahak", JSON.stringify(userData));
-        navigate("/main");
+        if (password !== confirmPassword) {
+            toast.error("Passwords do not match");
+            return;
+
+        } else {
+            const userData = { email, password };
+            localStorage.setItem("meraGrahak", JSON.stringify(userData));
+            navigate("/main");
+        }
     };
 
     return (
