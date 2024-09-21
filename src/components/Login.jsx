@@ -17,8 +17,19 @@ const Login = () => {
         }
     }, [isAuthenticated, navigate, login]);
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
     const handleLogin = (e) => {
         e.preventDefault();
+
+        if (!validateEmail(email)) {
+            toast.error("Please enter a valid email");
+            return;
+        }
+
         if (email === "test@gmail.com" && password === "quiz@123") {
             toast.success("Login Successful");
             login();

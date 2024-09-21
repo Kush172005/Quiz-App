@@ -10,6 +10,8 @@ import { AuthProvider } from "./components/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 import Result from "./components/Result";
+import Profile from "./components/Profile";
+import MainPage from "./components/MainPage";
 
 function App() {
     return (
@@ -17,7 +19,7 @@ function App() {
             <Router>
                 <Routes>
                     {/* Public routes */}
-                    <Route path="/" element={<Signup />} />
+                    <Route path="/" element={<MainPage />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
 
@@ -45,6 +47,10 @@ function App() {
                     <Route
                         path="/confetti"
                         element={<PrivateRoute element={<Confetti />} />}
+                    />
+                    <Route
+                        path="/profile"
+                        element={<PrivateRoute element={<Profile />} />}
                     />
                 </Routes>
             </Router>

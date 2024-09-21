@@ -1,13 +1,21 @@
 // Result.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { quizzes } from "../assets/data";
 import Confetti from "./Confetti";
 
 const Result = () => {
+    const [isExploding, setIsExploding] = useState(null);
+
     const { state } = useLocation();
     const { quizId, selectedOptions } = state || {};
     const quiz = quizzes.find((q) => q.id === quizId);
+
+    useEffect(() => {
+        if (score >= 5) {
+            setIsExploding(true);
+        }
+    }, []);
 
     if (!quiz) {
         return <div>Quiz not found</div>;
@@ -68,9 +76,18 @@ const Result = () => {
                         );
                     })}
                 </div>
+                {/* <button
+                    onClick={triggerConfetti}
+                    className="border-2 border-soft-teal text-soft-teal bg-gradient-to-r from-gray-800 to-gray-900 text-black px-4 py-2 rounded-lg hover:text-white transition duration-300"
+                >
+                    🎉 Celebrate
+                </button> */}
 
                 <div className="mt-8">
-                    <Confetti />
+                    <Confetti
+                        isExploding={isExploding}
+                        setIsExploding={setIsExploding}
+                    />
                 </div>
             </div>
         </div>

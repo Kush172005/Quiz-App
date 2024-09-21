@@ -18,8 +18,18 @@ const Signup = () => {
         }
     }, [navigate, login]);
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
     const handleSignup = (e) => {
         e.preventDefault();
+
+        if (!validateEmail(email)) {
+            toast.error("Please enter a valid email");
+            return;
+        }
 
         if (password === "" || email === "") {
             toast.error("All fields are required");
@@ -29,10 +39,10 @@ const Signup = () => {
         if (password !== confirmPassword) {
             toast.error("Passwords do not match");
             return;
-
         } else {
             const userData = { email, password };
             localStorage.setItem("meraGrahak", JSON.stringify(userData));
+            toast.success("Signup Successful");
             navigate("/main");
         }
     };
