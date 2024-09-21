@@ -30,7 +30,7 @@ const Quiz = () => {
         } else if (timeLeft === 0) {
             handleSubmit();
         }
-    }, [timeLeft, quizStarted]);
+    });
 
     // Konsa Option Choose Hua
     const handleOptionClick = (optionIndex) => {

@@ -1,4 +1,3 @@
-// Result.jsx
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { quizzes } from "../assets/data";
@@ -11,24 +10,24 @@ const Result = () => {
     const { quizId, selectedOptions } = state || {};
     const quiz = quizzes.find((q) => q.id === quizId);
 
-    useEffect(() => {
-        if (score >= 5) {
-            setIsExploding(true);
-        }
-    }, []);
-
-    if (!quiz) {
-        return <div>Quiz not found</div>;
-    }
-
     const calculateScore = () => {
-        return quiz.questions.reduce((score, question, index) => {
+        return quiz?.questions.reduce((score, question, index) => {
             return score + (selectedOptions[index] === question.ans ? 1 : 0);
         }, 0);
     };
 
-    const score = calculateScore();
-    const totalQuestions = quiz.questions.length;
+    const score = quiz ? calculateScore() : 0;
+    const totalQuestions = quiz ? quiz.questions.length : 0;
+
+    useEffect(() => {
+        if (quiz && score >= 5) {
+            setIsExploding(true);
+        }
+    }, [score, quiz]);
+
+    if (!quiz) {
+        return <div>Quiz not found</div>;
+    }
 
     return (
         <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-12">
@@ -76,12 +75,6 @@ const Result = () => {
                         );
                     })}
                 </div>
-                {/* <button
-                    onClick={triggerConfetti}
-                    className="border-2 border-soft-teal text-soft-teal bg-gradient-to-r from-gray-800 to-gray-900 text-black px-4 py-2 rounded-lg hover:text-white transition duration-300"
-                >
-                    🎉 Celebrate
-                </button> */}
 
                 <div className="mt-8">
                     <Confetti
