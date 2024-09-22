@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import Quill from "quill";
+import { toast } from "react-toastify";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
     const [quizTitle, setQuizTitle] = useState("");
     const [questions, setQuestions] = useState([]);
+    const navigate = useNavigate();
     const quillRef = useRef(null);
 
     const [form, setForm] = useState({
@@ -66,6 +69,7 @@ const Create = () => {
     };
 
     const handleQuizSubmit = () => {
+        toast.success("Quiz created successfuly");
         const newQuiz = {
             title: quizTitle,
             questions: questions.map((q) => ({
@@ -75,6 +79,9 @@ const Create = () => {
                 explanation: q.explanation,
             })),
         };
+        setTimeout(() => {
+            navigate("/main");
+        }, 2000);
 
         // Save the quiz in local storage or send to server/database
         localStorage.setItem("createdQuiz", JSON.stringify(newQuiz));
