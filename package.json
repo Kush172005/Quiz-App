@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@prisma/client": "^5.20.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
     "dompurify": "^3.1.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
     "framer-motion": "^11.5.6",
     "html-react-parser": "^5.1.16",
+    "nodemon": "^3.1.7",
+    "prisma": "^5.20.0",
     "quill": "^2.0.2",
     "react": "^18.3.1",
     "react-confetti-explosion": "^2.1.2",
@@ -47,5 +54,10 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.45",
     "tailwindcss": "^3.4.10"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
