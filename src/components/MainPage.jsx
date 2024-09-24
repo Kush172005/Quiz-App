@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion"; // For animations
+import { motion } from "framer-motion"; 
 
 const MainPage = () => {
     const navigate = useNavigate();

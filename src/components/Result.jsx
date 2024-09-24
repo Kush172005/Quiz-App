@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { quizzes } from "../assets/data";
 import Confetti from "./Confetti";
 
@@ -15,6 +15,8 @@ const Result = () => {
             return score + (selectedOptions[index] === question.ans ? 1 : 0);
         }, 0);
     };
+
+    const navigate = useNavigate();
 
     const score = quiz ? calculateScore() : 0;
     const totalQuestions = quiz ? quiz.questions.length : 0;
@@ -74,6 +76,14 @@ const Result = () => {
                             </div>
                         );
                     })}
+                    <div className="w-full flex justify-center">
+                        <button
+                            onClick={() => navigate("/main")}
+                            className="w-1/2 bg-soft-teal text-black py-3 rounded-lg text-lg font-semibold hover:bg-muted-purple hover:text-white transition"
+                        >
+                            Done and back to home
+                        </button>
+                    </div>
                 </div>
 
                 <div className="mt-8">
