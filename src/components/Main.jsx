@@ -128,7 +128,10 @@ const QuizList = () => {
                                 <p className="text-gray-300 mb-4">
                                     {createdQuiz.questions.length} Questions
                                 </p>
-                                <button disabled className="bg-soft-teal card-button text-black px-6 py-2 rounded-lg text-lg font-medium hover:bg-muted-purple hover:text-white transition duration-300">
+                                <button
+                                    disabled
+                                    className="bg-soft-teal card-button text-black px-6 py-2 rounded-lg text-lg font-medium hover:bg-muted-purple hover:text-white transition duration-300"
+                                >
                                     Coming Soon !!
                                 </button>
                             </div>
