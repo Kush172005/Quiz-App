@@ -43,8 +43,11 @@ const Result = () => {
 
                 <div className="mt-6 space-y-4">
                     {quiz.questions.map((question, index) => {
-                        const userAnswer = selectedOptions[index];
-                        const isCorrect = userAnswer === question.ans;
+                        const userAnswerIndex = selectedOptions[index];
+                        const correctAnswerIndex = question.ans;
+                        const isCorrect =
+                            userAnswerIndex === correctAnswerIndex;
+
                         return (
                             <div
                                 key={index}
@@ -61,12 +64,12 @@ const Result = () => {
                                     }`}
                                 >
                                     Your answer:{" "}
-                                    {question[`option${userAnswer}`] ||
+                                    {question.options[userAnswerIndex] ||
                                         "Not Answered"}
                                 </p>
                                 <p className="mt-1 text-gray-400">
                                     Correct answer:{" "}
-                                    {question[`option${question.ans}`]}
+                                    {question.options[correctAnswerIndex]}
                                 </p>
                                 {question.explanation && (
                                     <p className="mt-2 text-gray-400">
