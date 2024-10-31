@@ -46,8 +46,18 @@ const Profile = () => {
         }));
     };
 
+    // Email validation function
+    const isValidEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
     const saveProfile = () => {
-        toast.success("Changes Saved Successfuly");
+        if (!isValidEmail(userData.email)) {
+            toast.error("Please enter a valid email address.");
+            return;
+        }
+        toast.success("Changes Saved Successfully");
         const storedUser = JSON.parse(localStorage.getItem("meraGrahak")) || {};
         storedUser.name = userData.name;
         storedUser.email = userData.email;
