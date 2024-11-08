@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
 import { toast } from "react-toastify";
+import { userSignup } from "../../api/auth";
 
 const Signup = () => {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const { login } = useAuth();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const savedUser = localStorage.getItem("meraGrahak");
-        if (savedUser) {
-            login();
-            navigate("/main");
-        }
-    }, [navigate, login]);
 
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
 
         if (!validateEmail(email)) {
@@ -31,19 +22,25 @@ const Signup = () => {
             return;
         }
 
-        if (password === "" || email === "") {
+        if (!name || !email || !password) {
             toast.error("All fields are required");
             return;
         }
 
-        if (password !== confirmPassword) {
-            toast.error("Passwords do not match");
-            return;
-        } else {
-            const userData = { email, password };
-            localStorage.setItem("meraGrahak", JSON.stringify(userData));
-            toast.success("Signup Successful");
-            navigate("/main");
+        try {
+            const response = await userSignup({ name, email, password });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success("Signup Successful");
+                navigate("/login");
+            } else {
+                toast.error(data.message || "Signup failed");
+            }
+        } catch (error) {
+            console.error("Signup error:", error);
+            toast.error("Failed to signup. Please try again.");
         }
     };
 
@@ -54,6 +51,18 @@ const Signup = () => {
                     Signup
                 </h2>
                 <form onSubmit={handleSignup} className="space-y-4">
+                    <div>
+                        <label className="block text-soft-teal mb-2">
+                            Name
+                        </label>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Enter your name"
+                            className="w-full p-3 bg-gray-800 border border-soft-teal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-teal"
+                        />
+                    </div>
                     <div>
                         <label className="block text-soft-teal mb-2">
                             Email
@@ -78,18 +87,6 @@ const Signup = () => {
                             className="w-full p-3 bg-gray-800 border border-soft-teal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-teal"
                         />
                     </div>
-                    <div>
-                        <label className="block text-soft-teal mb-2">
-                            Confirm Password
-                        </label>
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder="Confirm your password"
-                            className="w-full p-3 bg-gray-800 border border-soft-teal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-teal"
-                        />
-                    </div>
                     <button
                         type="submit"
                         className="w-full bg-soft-teal text-black px-6 py-3 rounded-lg hover:bg-muted-purple hover:text-white transition duration-300"
@@ -97,7 +94,7 @@ const Signup = () => {
                         Signup
                     </button>
                     <div className="flex justify-evenly">
-                        <p>Already Have an account ?</p>
+                        <p>Already have an account?</p>
                         <span
                             onClick={() => navigate("/login")}
                             className="text-soft-teal cursor-pointer"

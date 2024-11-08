@@ -117,7 +117,6 @@ const Quiz = () => {
                 </div>
             ) : (
                 <div className="w-full max-w-3xl">
-                    {/* Timer Display */}
                     <div className="flex justify-between mb-4">
                         <div className="bg-gray-800 text-soft-teal py-2 px-4 rounded-lg font-semibold text-xl">
                             Time Left: {Math.floor(timeLeft / 60)}:
@@ -126,7 +125,6 @@ const Quiz = () => {
                         </div>
                     </div>
 
-                    {/* Quiz Question */}
                     <div className="bg-gradient-to-r from-gray-800 to-gray-900 shadow-2xl rounded-xl border-2 border-soft-teal p-8 space-y-6">
                         <h4 className="text-3xl font-bold text-soft-teal text-center">
                             {index + 1}. {questions[index]?.question}

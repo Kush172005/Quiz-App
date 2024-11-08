@@ -1,8 +1,8 @@
 .ql-editor::before {
-  color: #64d2b3 !important; 
+  color: #64d2b3 !important;
   font-style: italic;
-  font-size: 16px; 
-  opacity: 0.8; 
+  font-size: 16px;
+  opacity: 0.8;
 }
 
 
@@ -46,16 +46,71 @@
 }
 
 .Toastify__toast--success {
-  background-color: #64D2B3; /* Soft teal */
+  background-color: #64D2B3;
+  /* Soft teal */
   color: black;
 }
 
 .Toastify__toast--error {
-  background-color: #FF4081; /* Red for error */
+  background-color: #FF4081;
+  /* Red for error */
   color: white;
 }
 
 .Toastify__toast--info {
-  background-color: #9180C2; /* Muted purple */
+  background-color: #9180C2;
+  /* Muted purple */
   color: white;
 }
+
+/* 
+.header {
+  height: 90px;
+  background-color: #C7226C;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+}
+
+.main {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.logo {
+  color: #940FDB;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.second {
+  color: white;
+  font-size: 1rem;
+}
+.del{
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.third {
+  width: 50%;
+  color: black;
+}
+
+.inp{
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.four {
+  display: flex;
+  width: 10%;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+} */
+

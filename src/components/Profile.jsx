@@ -1,67 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuth } from "../context/AuthContext";
 
 const Profile = () => {
-    const [userData, setUserData] = useState({
-        name: "",
-        email: "",
-        profileImage: "",
-    });
-
+    const { user, setUser } = useAuth();
     const navigate = useNavigate();
 
-    // Load user data from local storage on component mount
-    useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem("meraGrahak")) || {};
-        const storedProfileImage = localStorage.getItem("profileImage");
-        setUserData({
-            name: storedUser.name || "",
-            email: storedUser.email || "visitor@gmail.com",
-            profileImage:
-                storedProfileImage ||
-                "https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png",
-        });
-    }, []);
+    const [profileImage, setProfileImage] = useState(
+        localStorage.getItem("profileImage") ||
+            "https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png"
+    );
+
+    const [nickname, setNickname] = useState(user.name);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
         reader.onloadend = () => {
-            setUserData((prevState) => ({
-                ...prevState,
-                profileImage: reader.result,
-            }));
-            // Save the profile image to local storage
+            setProfileImage(reader.result);
             localStorage.setItem("profileImage", reader.result);
         };
         reader.readAsDataURL(file);
     };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setUserData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
-
-    // Email validation function
-    const isValidEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+    const handleNicknameChange = (e) => {
+        setNickname(e.target.value);
     };
 
     const saveProfile = () => {
-        if (!isValidEmail(userData.email)) {
-            toast.error("Please enter a valid email address.");
-            return;
-        }
+        setUser({ ...user, name: nickname });
+
         toast.success("Changes Saved Successfully");
-        const storedUser = JSON.parse(localStorage.getItem("meraGrahak")) || {};
-        storedUser.name = userData.name;
-        storedUser.email = userData.email;
-        localStorage.setItem("meraGrahak", JSON.stringify(storedUser));
         setTimeout(() => {
             navigate("/main");
         }, 1000);
@@ -74,19 +44,14 @@ const Profile = () => {
                     Profile
                 </h2>
 
-                {/* Profile Image */}
                 <div className="flex justify-center">
                     <img
-                        src={
-                            userData.profileImage ||
-                            "https://via.placeholder.com/150"
-                        }
+                        src={profileImage}
                         alt="Profile"
                         className="w-32 h-32 rounded-full object-cover border-2 border-soft-teal"
                     />
                 </div>
 
-                {/* Upload Image */}
                 <div className="mt-4">
                     <label className="block text-soft-teal mb-2">
                         Change Profile Image
@@ -99,35 +64,28 @@ const Profile = () => {
                     />
                 </div>
 
-                {/* Name Input */}
                 <div>
                     <label className="block text-soft-teal mb-2">
                         Nickname
                     </label>
                     <input
                         type="text"
-                        name="name"
-                        placeholder="Enter Your Nickname"
-                        value={userData.name}
-                        onChange={handleInputChange}
+                        value={nickname}
+                        onChange={handleNicknameChange}
                         className="w-full p-3 bg-gray-800 border border-soft-teal text-white rounded-lg"
                     />
                 </div>
 
-                {/* Email Input */}
                 <div>
                     <label className="block text-soft-teal mb-2">Email</label>
                     <input
-                        placeholder="Enter Your Email"
                         type="email"
-                        name="email"
-                        value={userData.email}
-                        onChange={handleInputChange}
+                        value={user.email || ""}
+                        disabled
                         className="w-full p-3 bg-gray-800 border border-soft-teal text-white rounded-lg"
                     />
                 </div>
 
-                {/* Save Button */}
                 <button
                     onClick={saveProfile}
                     className="w-full bg-soft-teal text-black px-6 py-3 rounded-lg hover:bg-muted-purple hover:text-white transition duration-300"

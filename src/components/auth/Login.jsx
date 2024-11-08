@@ -1,59 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
 import { toast } from "react-toastify";
+import { useAuth } from "../../context/AuthContext";
+import { userLogin } from "../../api/auth";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { isAuthenticated, login } = useAuth();
+    const { setIsAuthenticated, isAuthenticated, setUser } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-        const savedUser = localStorage.getItem("meraGrahak");
-        if (savedUser && !isAuthenticated) {
-            login();
+        if (isAuthenticated) {
             navigate("/main");
         }
-    }, [isAuthenticated, navigate, login]);
+    }, [isAuthenticated, navigate]);
 
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
-        if (!validateEmail(email)) {
-            toast.error("Please enter a valid email");
+        if (!validateEmail(email) || !password) {
+            toast.error("Please enter valid credentials");
             return;
         }
 
-        if (email === "test@gmail.com" && password === "quiz@123") {
-            toast.success("Login Successful");
-            login();
-            navigate("/main");
-        } else {
-            const storedUser = JSON.parse(localStorage.getItem("meraGrahak"));
-
-            if (
-                storedUser &&
-                storedUser.email === email &&
-                storedUser.password === password
-            ) {
+        try {
+            const response = await userLogin({ email, password });
+            const data = await response.json();
+            if (response.ok) {
                 toast.success("Login Successful");
-                login();
+                localStorage.setItem("authToken", data.token);
+                setUser(data);
+                console.log(data);
+                setIsAuthenticated(true);
                 navigate("/main");
             } else {
-                toast.error("Invalid credentials or user not registered");
+                toast.error(
+                    data.message || "Invalid credentials or user not registered"
+                );
             }
+        } catch (error) {
+            console.error("Login error:", error);
+            toast.error("Failed to login. Please try again.");
         }
-    };
-
-    const takeToMain = () => {
-        setEmail("test@gmail.com");
-        setPassword("quiz@123");
     };
 
     return (
@@ -74,6 +68,7 @@ const Login = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter your email"
                                 className="w-full p-3 bg-gray-800 border border-soft-teal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-teal"
+                                autoComplete="email"
                             />
                         </div>
                         <div>
@@ -86,6 +81,7 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Enter your password"
                                 className="w-full p-3 bg-gray-800 border border-soft-teal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-teal"
+                                autoComplete="password"
                             />
                         </div>
                         <button
@@ -104,12 +100,6 @@ const Login = () => {
                             </span>
                         </div>
                     </form>
-                </div>
-                <div className="flex gap-4">
-                    <div>Want to get a quick look?</div>
-                    <button onClick={takeToMain} className="text-soft-teal">
-                        Click Here
-                    </button>
                 </div>
             </div>
         </div>
