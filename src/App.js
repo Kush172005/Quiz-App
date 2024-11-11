@@ -18,14 +18,11 @@ import QuestionsPage from "./components/Questions/QuestionsPage";
 function App() {
     return (
         <AuthProvider>
-            {/* <Router> */}
             <Routes>
-                {/* Public routes */}
                 <Route path="/" element={<MainPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
 
-                {/* Protected routes */}
                 <Route
                     path="/main"
                     element={<PrivateRoute element={<Main />} />}
@@ -64,7 +61,6 @@ function App() {
                     element={<PrivateRoute element={<Profile />} />}
                 />
             </Routes>
-            {/* </Router> */}
         </AuthProvider>
     );
 }

@@ -33,7 +33,7 @@ const Login = () => {
             const response = await userLogin({ email, password });
             const data = await response.json();
             if (response.ok) {
-                toast.success("Login Successful");
+                toast.success(data.message);
                 localStorage.setItem("authToken", data.token);
                 setUser(data);
                 console.log(data);

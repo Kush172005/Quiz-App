@@ -20,7 +20,6 @@ const Quiz = () => {
         }
     }, [quizId]);
 
-    // Timer effect handling
     useEffect(() => {
         if (timeLeft > 0 && quizStarted) {
             const countdown = setTimeout(() => {

@@ -1,13 +1,26 @@
 import { ENDPOINT } from "../helpers/constants";
 
-export const createQuiz = async ({ accessToken, title, description }) => {
+export const createQuiz = async ({
+    accessToken,
+    title,
+    description,
+    accessType,
+    accessTo = [],
+}) => {
+    const payload = {
+        title,
+        description,
+        accessType,
+        accessTo,
+    };
+
     return await fetch(`${ENDPOINT}/api/quiz/create`, {
         method: "POST",
         headers: {
             authorization: accessToken,
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, description }),
+        body: JSON.stringify(payload),
     });
 };
 

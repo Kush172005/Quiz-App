@@ -69,9 +69,9 @@ const Questions = () => {
         });
     };
 
-    const handleSubmitQuiz = () => {
-        console.log("Submitted Quiz:", { quizTitle, quizDescription, forms });
-    };
+    // const handleSubmitQuiz = () => {
+    //     console.log("Submitted Quiz:", { quizTitle, quizDescription, forms });
+    // };
 
     return (
         <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-12">
@@ -120,12 +120,12 @@ const Questions = () => {
                     Add New Question
                 </button>
 
-                <div
+                {/* <div
                     className="bg-soft-teal cursor-pointer text-black px-6 py-3 rounded-lg hover:bg-muted-purple hover:text-white transition duration-300 mt-4"
                     onClick={handleSubmitQuiz}
                 >
                     Submit Quiz
-                </div>
+                </div> */}
             </div>
         </div>
     );
