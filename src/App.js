@@ -7,13 +7,13 @@ import Signup from "./components/auth/Signup";
 import Confetti from "./components/Confetti";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
-import "./App.css";
 import Result from "./components/Result";
 import Profile from "./components/Profile";
 import MainPage from "./components/MainPage";
 import Login from "./components/auth/Login";
 import CreateQuiz from "./components/CreateQuiz";
 import QuestionsPage from "./components/Questions/QuestionsPage";
+import "./App.css";
 
 function App() {
     return (

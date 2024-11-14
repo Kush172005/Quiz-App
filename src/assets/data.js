@@ -753,4 +753,92 @@ export const quizzes = [
             },
         ],
     },
+    {
+        id: 9,
+        title: "SQL Fundamentals",
+        description:
+            "Test your knowledge on the basics of SQL and database management.",
+        questions: [
+            {
+                question: "What does SQL stand for?",
+                options: [
+                    "Structured Query Language",
+                    "Sequential Query Language",
+                    "Standard Query List",
+                    "Structured Query List",
+                ],
+                ans: 1,
+            },
+            {
+                question:
+                    "Which SQL statement is used to extract data from a database?",
+                options: ["GET", "EXTRACT", "SELECT", "FETCH"],
+                ans: 3,
+            },
+            {
+                question: "Which SQL clause is used to filter results?",
+                options: ["ORDER BY", "WHERE", "FILTER", "SORT"],
+                ans: 2,
+            },
+            {
+                question:
+                    "How do you select all columns from a table named 'Users'?",
+                options: [
+                    "SELECT * FROM Users;",
+                    "SELECT all FROM Users;",
+                    "GET all FROM Users;",
+                    "SHOW * FROM Users;",
+                ],
+                ans: 1,
+            },
+            {
+                question:
+                    "Which SQL statement is used to insert new data into a table?",
+                options: ["ADD", "UPDATE", "INSERT", "APPEND"],
+                ans: 3,
+            },
+            {
+                question: "What does the 'JOIN' clause do in SQL?",
+                options: [
+                    "Combines columns",
+                    "Adds new rows",
+                    "Merges rows from different tables",
+                    "Removes duplicates",
+                ],
+                ans: 3,
+            },
+            {
+                question:
+                    "Which SQL statement is used to delete data from a table?",
+                options: ["REMOVE", "DELETE", "DROP", "ERASE"],
+                ans: 2,
+            },
+            {
+                question: "What is a primary key?",
+                options: [
+                    "A unique identifier for each record",
+                    "A column that only accepts numeric values",
+                    "A foreign key in the table",
+                    "A column that only allows NULL values",
+                ],
+                ans: 1,
+            },
+            {
+                question:
+                    "Which SQL function is used to count the number of rows in a table?",
+                options: ["COUNT()", "SUM()", "TOTAL()", "NUMBER()"],
+                ans: 1,
+            },
+            {
+                question: "How do you rename a column in SQL?",
+                options: [
+                    "CHANGE COLUMN",
+                    "MODIFY COLUMN",
+                    "RENAME COLUMN",
+                    "ALTER COLUMN",
+                ],
+                ans: 3,
+            },
+        ],
+    },
 ];

@@ -66,33 +66,39 @@ const MyQuizes = () => {
                 Quizzes Created By Me
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {myQuizes.map((quiz) => (
-                    <div
-                        key={quiz.id}
-                        className="bg-gray-800 p-6 rounded-lg border border-soft-teal transition transform hover:scale-105 shadow-lg"
-                    >
-                        <h3 className="text-xl font-semibold text-neon-blue mb-3">
-                            {quiz.title}
-                        </h3>
-                        <p className="text-gray-300 mb-4">{quiz.description}</p>
-                        <div className="flex gap-4">
-                            <button
-                                onClick={() =>
-                                    navigate(`/questions/${quiz.id}`)
-                                }
-                                className="bg-soft-teal text-black px-6 py-2 rounded-lg text-lg font-medium hover:bg-muted-purple transition"
-                            >
-                                Open Quiz
-                            </button>
-                            <button
-                                onClick={() => handleDeleteQuiz(quiz.id)}
-                                className="bg-red-700 text-white px-4 py-2 rounded-lg flex items-center justify-center hover:bg-red-800 transition"
-                            >
-                                <FontAwesomeIcon icon={faTrashAlt} />
-                            </button>
+                {myQuizes.length === 0 ? (
+                    <p className="text-gray-300">No quiz created by me yet.</p>
+                ) : (
+                    myQuizes.map((quiz) => (
+                        <div
+                            key={quiz.id}
+                            className="bg-gray-800 p-6 rounded-lg border border-soft-teal transition transform hover:scale-105 shadow-lg"
+                        >
+                            <h3 className="text-xl font-semibold text-neon-blue mb-3">
+                                {quiz.title}
+                            </h3>
+                            <p className="text-gray-300 mb-4">
+                                {quiz.description}
+                            </p>
+                            <div className="flex gap-4">
+                                <button
+                                    onClick={() =>
+                                        navigate(`/questions/${quiz.id}`)
+                                    }
+                                    className="bg-soft-teal text-black px-6 py-2 rounded-lg text-lg font-medium hover:bg-muted-purple transition"
+                                >
+                                    Open Quiz
+                                </button>
+                                <button
+                                    onClick={() => handleDeleteQuiz(quiz.id)}
+                                    className="bg-red-700 text-white px-4 py-2 rounded-lg flex items-center justify-center hover:bg-red-800 transition"
+                                >
+                                    <FontAwesomeIcon icon={faTrashAlt} />
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                )}
             </div>
 
             {/* Shared Quizzes Section */}

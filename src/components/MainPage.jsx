@@ -26,10 +26,10 @@ const MainPage = () => {
                     transition={{ duration: 1.5, ease: "easeInOut" }}
                     className="relative z-10"
                 >
-                    <h1 className="text-6xl font-extrabold text-soft-teal">
+                    <h1 className="text-6xl m-8 font-extrabold text-soft-teal">
                         Welcome to QuizMaster
                     </h1>
-                    <p className="text-2xl mt-6 text-gray-400">
+                    <p className="text-2xl mt-6 mx-8 text-gray-400">
                         Your ultimate destination for engaging quizzes and fun
                         learning!
                     </p>
@@ -37,7 +37,7 @@ const MainPage = () => {
 
                 {/* Animated Highlights Section */}
                 <motion.div
-                    className="relative grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 z-10"
+                    className="mx-8 relative grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 z-10"
                     initial="hidden"
                     animate="visible"
                     transition={{ delay: 0.5, duration: 1.5 }}
