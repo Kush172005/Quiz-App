@@ -9,10 +9,10 @@ import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Result from "./components/Result";
 import Profile from "./components/Profile";
-import MainPage from "./components/MainPage";
 import Login from "./components/auth/Login";
 import CreateQuiz from "./components/CreateQuiz";
 import QuestionsPage from "./components/Questions/QuestionsPage";
+import MainPage from "./components/MainPage";
 import "./App.css";
 
 function App() {
