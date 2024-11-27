@@ -1,14 +1,24 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
+import { useAuth } from "../context/AuthContext";
 
 const MainPage = () => {
     const navigate = useNavigate();
+    const { isAuthenticated } = useAuth();
 
     // Animation Variants
     const fadeInUp = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 },
+    };
+
+    const checkAuthenticity = () => {
+        if (isAuthenticated) {
+            navigate("/main");
+        } else {
+            navigate("/signup");
+        }
     };
 
     return (
@@ -130,7 +140,7 @@ const MainPage = () => {
                     transition={{ delay: 0.8, duration: 1.5 }}
                 >
                     <button
-                        onClick={() => navigate("/signup")}
+                        onClick={checkAuthenticity}
                         className="bg-soft-teal text-black px-8 py-4 rounded-lg text-2xl font-semibold hover:bg-muted-purple hover:text-white transition duration-300"
                     >
                         Get Started!
